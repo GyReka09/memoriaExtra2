@@ -22,9 +22,9 @@ export default class Kartya {
   }
 
   setFajlnev(id) {
-    for (let index = 0; index < lista.length; index++) {
-      if (id === lista[index].id) {
-        this.#fajlnev = lista[index].nev;
+    for (let index = 0; index < this.#lista.length; index++) {
+      if (id === this.#lista[index].id) {
+        this.#fajlnev = this.#lista[index].nev;
       }
     }
   }

@@ -57,3 +57,14 @@ article button {
 article button:hover {
   background-color: #ccc;
 }
+.kartyater {
+  max-width: 800px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 5px;
+}
+.kartyater img {
+  border-radius: 5px;
+  max-width: 110px;
+}

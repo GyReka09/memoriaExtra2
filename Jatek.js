@@ -4,14 +4,14 @@ export default class Jatek {
   #kartyaLista;
   #db;
   #vegleges;
-  #lista;
+  #lista = [];
   #nehezseg;
-  #beallitott;
+  #beallitott = [];
   constructor(lista, nehezseg) {
     this.#lista = lista;
     this.#nehezseg = nehezseg;
     this.#db = 0;
-    this.#beallitott = [];
+    this.keverendoLista();
     this.#kartyaLista = [];
     this.#kivalasztottKartyaLista = [];
     this.#vegleges = [];
@@ -20,26 +20,25 @@ export default class Jatek {
     this.init();
   }
   init() {
-    const jatekterElem = document.querySelector(".jatekter");
+    const jatekterElem = document.querySelector(".kartyater");
     jatekterElem.innerHTML = "";
     this.#kartyaLista = [];
-    lista.forEach((kartya) => {
+    this.#beallitott.forEach((kartya) => {
       this.#kartyaLista.push(
         new Kartya(
           kartya.id,
           false,
-          document.querySelector(".jatekter"),
-          this.#lista
+          document.querySelector(".kartyater"),
+          this.#beallitott
         )
       );
     });
     this.#vegleges = [];
   }
   keverendoLista() {
-    for (let index = 0; index < nehezseg; index++) {
+    for (let index = 0; index < this.#nehezseg; index++) {
       this.#beallitott.push(this.#lista[index]);
     }
-    return this.#beallitott;
   }
   kever() {
     let currentIndex = this.#beallitott.length;
@@ -48,9 +47,9 @@ export default class Jatek {
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      [lista[currentIndex], lista[randomIndex]] = [
-        lista[randomIndex],
-        lista[currentIndex],
+      [this.#beallitott[currentIndex], this.#beallitott[randomIndex]] = [
+        this.#beallitott[randomIndex],
+        this.#beallitott[currentIndex],
       ];
     }
   }
