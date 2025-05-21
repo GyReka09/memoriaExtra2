@@ -1,0 +1,59 @@
+/* Alap stílusok */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Navigáció gombok */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+nav button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Article gombok oszlopban */
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+article button {
+  width: 80%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: #ddd;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+article button:hover {
+  background-color: #ccc;
+}
