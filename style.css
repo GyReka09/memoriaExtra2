@@ -67,4 +67,7 @@ article button:hover {
 .kartyater img {
   border-radius: 5px;
   max-width: 110px;
+  max-height: 104px;
+  width: 100%;
+  height: 100%;
 }

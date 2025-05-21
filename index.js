@@ -3,6 +3,7 @@ import Jatek from "./Jatek.js";
 import { verdak } from "./verdakLista.js";
 import { szornyek } from "./szornyLista.js";
 import { harry } from "./harryLista.js";
+import { extrem } from "./extremLista.js";
 const szuloElem = document.querySelector(".jatekter");
 const ujJatekGomb = document.querySelector(".ujra");
 let hasznaltLista = [];
@@ -29,6 +30,14 @@ function temaGombValasztas() {
     console.log("hvhjv");
     hasznaltLista = verdak;
     nehezseg();
+  });
+  extremGomb.addEventListener("click", () => {
+    hasznaltLista = extrem;
+    szuloElem.innerHTML = `<div class = "kartyater"></div>`;
+    jatekter = document.querySelector(".kartyater");
+    new Jatek(hasznaltLista, 120);
+    const kartyaMenny = document.querySelectorAll("img");
+    console.log(kartyaMenny.length);
   });
 }
 

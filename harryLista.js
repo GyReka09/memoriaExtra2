@@ -57,11 +57,11 @@ export const harry = [
   },
   {
     id: 8,
-    nev: "harry89.jpeg",
+    nev: "harry8.jpeg",
   },
   {
     id: 8,
-    nev: "harry89.jpeg",
+    nev: "harry8.jpeg",
   },
   {
     id: 9,
