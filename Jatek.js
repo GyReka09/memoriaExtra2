@@ -1,5 +1,10 @@
 import Kartya from "./Kartya.js";
+import { LeaderBoard } from "./leaderBoardLista.js";
 export default class Jatek {
+  #stopperId = null;
+  #idő = 0;
+  #stopperFut = false;
+  stopperElem;
   #kivalasztottKartyaLista;
   #kartyaLista;
   #db;
@@ -7,7 +12,12 @@ export default class Jatek {
   #lista = [];
   #nehezseg;
   #beallitott = [];
-  constructor(lista, nehezseg) {
+  #leaderboard;
+
+  constructor(lista, nehezseg, leaderboard) {
+    this.#leaderboard = leaderboard;
+    this.stopperElem = document.querySelector(".stopper");
+    this.stopperIndit();
     this.#lista = lista;
     this.#nehezseg = nehezseg;
     this.#db = 0;
@@ -15,13 +25,13 @@ export default class Jatek {
     this.#kartyaLista = [];
     this.#kivalasztottKartyaLista = [];
     this.#vegleges = [];
-    this.kever();
+    //this.kever();
     this.fordit();
     this.init();
   }
   init() {
     const jatekterElem = document.querySelector(".kartyater");
-    jatekterElem.innerHTML = "";
+    jatekterElem.innerHTML = ``;
     this.#kartyaLista = [];
     this.#beallitott.forEach((kartya) => {
       this.#kartyaLista.push(
@@ -53,15 +63,26 @@ export default class Jatek {
       ];
     }
   }
-  ellenorzes() {
-    if (this.#vegleges.length === this.#nehezseg) {
-      setTimeout(() => {
-        alert("Gratulálok, kész vagy! Újrakezdés!");
-        this.kever();
-        this.init();
-      }, 500);
-    }
+
+
+ellenorzes() {
+  if (this.#vegleges.length === this.#nehezseg) {
+    this.stopperMegallit();
+    setTimeout(() => {
+      const nev = prompt(`Gratulálok! Add meg a neved:`);
+      if (nev) {
+        LeaderBoard.push({ name: nev, time: this.#idő });
+      }
+      alert(`Gratulálok, kész vagy! Időd: ${this.#idő} másodperc`);
+      this.kever();
+      this.init();
+      this.#idő = 0;
+      if (this.stopperElem) this.stopperElem.textContent = `Idő: 0 mp`;
+      this.stopperIndit();
+    }, 500);
   }
+}
+
 
   fordit() {
     window.addEventListener("fordit", (event) => {
@@ -117,4 +138,25 @@ export default class Jatek {
       }
     });
   }
+
+  stopperIndit() {
+    if (this.#stopperFut) return; // Már fut
+    this.#stopperFut = true;
+    this.#idő = 0;
+
+    this.#stopperId = setInterval(() => {
+      this.#idő++;
+      if (this.stopperElem) {
+        this.stopperElem.textContent = `Idő: ${this.#idő} mp`;
+      }
+    }, 1000);
+  }
+
+  stopperMegallit() {
+    clearInterval(this.#stopperId);
+    this.#stopperFut = false;
+    console.log("Játék vége, idő:", this.#idő);
+}
+
+
 }
