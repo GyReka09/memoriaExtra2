@@ -106,3 +106,66 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 background-color:white;
 border-radius: 10px;
 }
+
+
+
+body.dark-theme {
+  background-color: #121212;
+  color: #eee;
+}
+body.dark-theme h1 {
+  color: #fff; /* or #eee for slightly softer white */
+}
+
+body.dark-theme main {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme nav button {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme article button {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .leader-entry {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme label {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme input {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+
+body.dark-theme nav ul {
+  gap: 1.5rem;
+}
+
+body.dark-theme article button:hover {
+  background-color: #444;
+}
+
+body.dark-theme .kartyater img {
+  filter: brightness(0.8);
+  border-radius: 5px;
+  max-width: 110px;
+  max-height: 104px;
+  width: 100%;
+  height: 100%;
+}

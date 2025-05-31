@@ -1,5 +1,5 @@
 import Kartya from "./Kartya.js";
-import { LeaderBoard } from "./leaderBoardLista.js";
+import { KonnyuLeader } from "./leaderboard/KonnyuLeaderBoardLista.js";
 export default class Jatek {
   #stopperId = null;
   #idő = 0;
@@ -25,7 +25,7 @@ export default class Jatek {
     this.#kartyaLista = [];
     this.#kivalasztottKartyaLista = [];
     this.#vegleges = [];
-    //this.kever();
+    this.kever();
     this.fordit();
     this.init();
   }
@@ -71,8 +71,8 @@ ellenorzes() {
     setTimeout(() => {
       const nev = prompt(`Gratulálok! Add meg a neved:`);
       if (nev) {
-        LeaderBoard.push({ name: nev, time: this.#idő });
-      }
+        this.#leaderboard.push({ name: nev, time: this.#idő, level: this.#nehezseg });
+      }      
       alert(`Gratulálok, kész vagy! Időd: ${this.#idő} másodperc`);
       this.kever();
       this.init();

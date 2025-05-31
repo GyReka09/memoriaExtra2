@@ -1,10 +1,13 @@
 import Kartya from "./Kartya.js";
 import Jatek from "./Jatek.js";
-import { verdak } from "./verdakLista.js";
-import { szornyek } from "./szornyLista.js";
-import { harry } from "./harryLista.js";
-import { extrem } from "./extremLista.js";
-import { LeaderBoard } from "./leaderBoardLista.js";
+import { verdak } from "./tema/verdakLista.js";
+import { szornyek } from "./tema/szornyLista.js";
+import { harry } from "./tema/harryLista.js";
+import { extrem } from "./tema/extremLista.js";
+import { KonnyuLeader } from "./leaderboard/KonnyuLeaderBoardLista.js";
+import { KozepesLeader } from "./leaderboard/KozepesLeaderBoardLista.js";
+import { NehezLeader } from "./leaderboard/NehezLeaderBoardLista.js";
+
 const szuloElem = document.querySelector(".jatekter");
 const ujJatekGomb = document.querySelector(".ujra");
 const leaderGomb = document.querySelector(".leader");
@@ -66,11 +69,26 @@ ujJatekGomb.addEventListener("click", () => {
   temaGombValasztas();
 });
 
+const darkModeToggle = document.getElementById("darkMode");
+if (darkModeToggle) {
+  darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+  });
+}
 
 
 leaderGomb.addEventListener("click", () => {
-  megjelenitLeaderBoard(LeaderBoard);
+  if (szint === 20) {
+    megjelenitLeaderBoard(KonnyuLeader);
+  } else if (szint === 30) {
+    megjelenitLeaderBoard(KozepesLeader);
+  } else if (szint === 40) {
+    megjelenitLeaderBoard(NehezLeader);
+  } else{
+    
+  }
 });
+
 
 console.log(konnyuGomb, kozepesGomb, nehezGomb);
 
@@ -81,21 +99,23 @@ function nehezsegGombValasztas() {
     szuloElem.innerHTML = `<div class = "kartyater"></div>
                           <div class="stopper">Idő: 0 mp</div>`;
     jatekter = document.querySelector(".kartyater");
-    new Jatek(hasznaltLista, szint);
+    new Jatek(hasznaltLista, szint, KonnyuLeader);
   });
   kozepesGomb.addEventListener("click", () => {
     szint = 30;
     console.log(szint);
-    szuloElem.innerHTML = `<div class = "kartyater"></div>`;
+    szuloElem.innerHTML = `<div class = "kartyater"></div>
+                          <div class="stopper">Idő: 0 mp</div>`;
     jatekter = document.querySelector(".kartyater");
-    new Jatek(hasznaltLista, szint);
+    new Jatek(hasznaltLista, szint, KozepesLeader);
   });
   nehezGomb.addEventListener("click", () => {
     szint = 40;
     console.log(szint);
-    szuloElem.innerHTML = `<div class = "kartyater"></div>`;
+    szuloElem.innerHTML = `<div class = "kartyater"></div>
+                          <div class="stopper">Idő: 0 mp</div>`;
     jatekter = document.querySelector(".kartyater");
-    new Jatek(hasznaltLista, szint);
+    new Jatek(hasznaltLista, szint, NehezLeader);
   });
 }
 function temaGombInit() {
@@ -115,7 +135,8 @@ function nehezsegGombMegjelenit() {
             <button class="nehez">Nehéz</button>
            `;
 }
-console.log(LeaderBoard)
+
+
 function megjelenitLeaderBoard(lista) {
   if (!lista || !Array.isArray(lista)) {
     szuloElem.innerHTML = "<p>Nincs elérhető leaderboard adat.</p>";
@@ -123,15 +144,16 @@ function megjelenitLeaderBoard(lista) {
   }
   const rendezettLista = lista.slice().sort((a, b) => a.time - b.time);
   szuloElem.innerHTML = `
-    <div class="leaderboard">
-      ${lista.map(player => `
-        <div class="leader-entry">
-          <strong>${player.name}</strong> - ${player.time} sec
-        </div>
-      `).join('')}
-    </div>
-    <button class="vissza">Vissza a témákhoz</button>
-  `;
+  <div class="leaderboard">
+    ${rendezettLista.map(player => `
+      <div class="leader-entry">
+         <strong>${player.name}</strong> - ${player.time} sec - Szint: ${player.level || "Ismeretlen"}
+      </div>
+    `).join('')}
+  </div>
+  <button class="vissza">Vissza a témákhoz</button>
+`;
+
 
  
   const visszaGomb = szuloElem.querySelector(".vissza");
